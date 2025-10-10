@@ -1,0 +1,46 @@
+{
+  "columns_us": {
+    "date": "fiscalDateEnding",
+    "company_name": "company_name",
+    "currency": "reportedCurrency",
+    "total_assets": "totalAssets",
+    "current_assets": "totalCurrentAssets",
+    "total_liabilities": "totalLiabilities",
+    "current_liabilities": "totalCurrentLiabilities",
+    "total_debt": "shortLongTermDebtTotal",
+    "dividends_paid": "dividendPayout",
+    "shareholder_equity": "totalShareholderEquity",
+    "net_income": "netIncome",
+    "operation_cash_flow": "operatingCashflow",
+    "ebit": "ebit",
+    "depreciation_and_amortization": "depreciationDepletionAndAmortization",
+    "capex": "capitalExpenditures",
+    "revenue": "totalRevenue"
+  },
+  "columns_br": {
+    "date": "DT_FIM_EXERC",
+    "company_name": "DENOM_CIA",
+    "currency": "MOEDA",
+    "total_assets": "Ativo Total",
+    "current_assets": "Ativo Circulante",
+    "total_liabilities": "Passivo Total",
+    "current_liabilities": "Passivo Circulante",
+    "total_debt": "Empréstimos e Financiamentos",
+    "dividends_paid": "Pagamento de Dividendos aos Acionistas",
+    "shareholder_equity": "Patrimônio Líquido Consolidado",
+    "net_income": "Lucro/Prejuízo Consolidado do Período",
+    "operation_cash_flow": "Caixa Líquido Atividades Operacionais",
+    "ebit": "Resultado Antes do Resultado Financeiro e dos Tributos",
+    "depreciation_and_amortization": "Depreciação e amortização",
+    "revenue": "Receita de Venda de Bens e/ou Serviços"
+  },
+  "formula_br": {
+    "working_capital": "current_assets - current_liabilities"
+  },
+  "formula_us": {
+    "working_capital": "current_assets - current_liabilities"
+  },
+  "header_order": ["date", "company_name", "currency", "total_assets", "current_assets",
+    "total_liabilities", "current_liabilities", "total_debt", "shareholder_equity",
+    "dividends_paid", "net_income", "operation_cash_flow", "revenue", "working_capital"]
+}
