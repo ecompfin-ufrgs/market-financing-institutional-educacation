@@ -2,6 +2,7 @@ import os
 import pandas as pd
 
 from src.data_processing.data_processor_base import DataProcessorBase
+from src.util import util
 
 
 class BRDataProcessor(DataProcessorBase):
@@ -19,6 +20,8 @@ class BRDataProcessor(DataProcessorBase):
 
             company_col = self.columns_mapping.get("company_name")
             date_col = self.columns_mapping.get("date")
+            numeric_cols_to_convert = [c for c in self.columns_mapping.keys() if
+                                       c not in ["date", "company_name", "currency"]]
 
             for company in df[company_col].unique():
                 df_company = df[df[company_col] == company]
@@ -34,7 +37,7 @@ class BRDataProcessor(DataProcessorBase):
                     for target_col, source_account_name in self.columns_mapping.items():
                         if target_col not in ["date", "company_name", "currency"]:
                             matched_rows = df_data_period[df_data_period["DS_CONTA"] == source_account_name]
-                            data[target_col] = matched_rows["VL_CONTA"].sum() if not matched_rows.empty else 0
+                            data[target_col] = matched_rows["VL_CONTA"].sum() * 1000 if not matched_rows.empty else 0
 
                     if "formula_br" in self.config:
                         for target_col, formula in self.config["formula_br"].items():
@@ -48,7 +51,15 @@ class BRDataProcessor(DataProcessorBase):
                                     print('Formula error:', e)
                                     data[target_col] = 0
 
+                    exchange_rate = util.get_usd_brl_exchange_rate_bcb(data["date"])
+                    conversion_factor = 1 / exchange_rate
+                    for col in numeric_cols_to_convert:
+                        if col in data and isinstance(data[col], (int, float)):
+                            data[col] = data[col] * conversion_factor
+
                     df_result.append(data)
+
+
 
             return pd.DataFrame(df_result)
         except KeyError as e:
@@ -57,7 +68,3 @@ class BRDataProcessor(DataProcessorBase):
         except Exception as e:
             print(f"Unexpected error while processing {file_path}: {e}")
             return None
-
-
-if __name__ == "__main__":
-    DataProcessorBase('br').run_processing(BRDataProcessor(), "br_balance_data.csv")

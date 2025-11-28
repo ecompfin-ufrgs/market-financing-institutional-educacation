@@ -1,0 +1,106 @@
+Country,Company,Variable,Original_Stationary,Transformation_Applied,Final_Stationary
+Brazil,COGNA EDUCAÇÃO S.A.,total_assets,False,Second Difference,True
+Brazil,SER EDUCACIONAL S.A.,total_assets,False,First Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,total_assets,False,First Difference,True
+Brazil,COGNA EDUCAÇÃO S.A.,current_assets,False,Second Difference,True
+Brazil,SER EDUCACIONAL S.A.,current_assets,False,First Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,current_assets,True,None,True
+Brazil,COGNA EDUCAÇÃO S.A.,total_liabilities,False,Second Difference,True
+Brazil,SER EDUCACIONAL S.A.,total_liabilities,False,First Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,total_liabilities,False,First Difference,True
+Brazil,COGNA EDUCAÇÃO S.A.,current_liabilities,False,Second Difference,True
+Brazil,SER EDUCACIONAL S.A.,current_liabilities,False,First Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,current_liabilities,False,Second Difference,True
+Brazil,COGNA EDUCAÇÃO S.A.,total_debt,False,First Difference,True
+Brazil,SER EDUCACIONAL S.A.,total_debt,False,Second Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,total_debt,False,First Difference,True
+Brazil,COGNA EDUCAÇÃO S.A.,shareholder_equity,False,Second Difference,True
+Brazil,SER EDUCACIONAL S.A.,shareholder_equity,False,Second Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,shareholder_equity,False,First Difference,True
+Brazil,COGNA EDUCAÇÃO S.A.,dividends_paid,False,First Difference,True
+Brazil,SER EDUCACIONAL S.A.,dividends_paid,True,None (Constant Series),True
+Brazil,YDUQS PARTICIPACOES S.A.,dividends_paid,True,None (Constant Series),True
+Brazil,COGNA EDUCAÇÃO S.A.,net_income,False,First Difference,True
+Brazil,SER EDUCACIONAL S.A.,net_income,False,First Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,net_income,False,First Difference,True
+Brazil,COGNA EDUCAÇÃO S.A.,operation_cash_flow,False,First Difference,True
+Brazil,SER EDUCACIONAL S.A.,operation_cash_flow,True,None,True
+Brazil,YDUQS PARTICIPACOES S.A.,operation_cash_flow,False,First Difference,True
+Brazil,COGNA EDUCAÇÃO S.A.,revenue,False,First Difference,True
+Brazil,SER EDUCACIONAL S.A.,revenue,False,First Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,revenue,False,First Difference,True
+Brazil,COGNA EDUCAÇÃO S.A.,working_capital,False,First Difference,True
+Brazil,SER EDUCACIONAL S.A.,working_capital,False,First Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,working_capital,False,First Difference,True
+Brazil,COGNA EDUCAÇÃO S.A.,debt_to_assets,False,First Difference,True
+Brazil,SER EDUCACIONAL S.A.,debt_to_assets,False,First Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,debt_to_assets,False,First Difference,True
+Brazil,COGNA EDUCAÇÃO S.A.,debt_to_equity,False,First Difference,True
+Brazil,SER EDUCACIONAL S.A.,debt_to_equity,False,First Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,debt_to_equity,False,First Difference,True
+Brazil,COGNA EDUCAÇÃO S.A.,roa,False,First Difference,True
+Brazil,SER EDUCACIONAL S.A.,roa,False,First Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,roa,False,First Difference,True
+Brazil,COGNA EDUCAÇÃO S.A.,debt_change,True,None,True
+Brazil,SER EDUCACIONAL S.A.,debt_change,False,First Difference,True
+Brazil,YDUQS PARTICIPACOES S.A.,debt_change,True,None,True
+USA,APEI,total_assets,True,None,True
+USA,ATGE,total_assets,False,First Difference,True
+USA,LOPE,total_assets,False,First Difference,True
+USA,STRA,total_assets,False,First Difference,True
+USA,APEI,current_assets,True,None,True
+USA,ATGE,current_assets,True,None,True
+USA,LOPE,current_assets,False,First Difference,True
+USA,STRA,current_assets,False,First Difference,True
+USA,APEI,total_liabilities,False,First Difference,True
+USA,ATGE,total_liabilities,False,First Difference,True
+USA,LOPE,total_liabilities,True,None,True
+USA,STRA,total_liabilities,False,First Difference,True
+USA,APEI,current_liabilities,False,Second Difference,True
+USA,ATGE,current_liabilities,False,Second Difference,True
+USA,LOPE,current_liabilities,False,First Difference,True
+USA,STRA,current_liabilities,False,Second Difference,True
+USA,APEI,total_debt,False,First Difference,True
+USA,ATGE,total_debt,False,First Difference,True
+USA,LOPE,total_debt,False,First Difference,True
+USA,STRA,total_debt,False,First Difference,True
+USA,APEI,shareholder_equity,False,First Difference,True
+USA,ATGE,shareholder_equity,False,First Difference,True
+USA,LOPE,shareholder_equity,False,First Difference,True
+USA,STRA,shareholder_equity,False,First Difference,True
+USA,APEI,dividends_paid,False,First Difference,True
+USA,ATGE,dividends_paid,True,None,True
+USA,LOPE,dividends_paid,True,None,True
+USA,STRA,dividends_paid,False,First Difference,True
+USA,APEI,net_income,True,None,True
+USA,ATGE,net_income,True,None,True
+USA,LOPE,net_income,False,First Difference,True
+USA,STRA,net_income,True,None,True
+USA,APEI,operation_cash_flow,True,None,True
+USA,ATGE,operation_cash_flow,False,Second Difference,True
+USA,LOPE,operation_cash_flow,False,First Difference,True
+USA,STRA,operation_cash_flow,False,First Difference,True
+USA,APEI,revenue,False,First Difference,True
+USA,ATGE,revenue,False,None,False
+USA,LOPE,revenue,False,First Difference,True
+USA,STRA,revenue,False,First Difference,True
+USA,APEI,working_capital,True,None,True
+USA,ATGE,working_capital,False,First Difference,True
+USA,LOPE,working_capital,False,First Difference,True
+USA,STRA,working_capital,True,None,True
+USA,APEI,debt_to_assets,False,First Difference,True
+USA,ATGE,debt_to_assets,False,First Difference,True
+USA,LOPE,debt_to_assets,True,None,True
+USA,STRA,debt_to_assets,False,First Difference,True
+USA,APEI,debt_to_equity,False,None,False
+USA,ATGE,debt_to_equity,False,First Difference,True
+USA,LOPE,debt_to_equity,False,First Difference,True
+USA,STRA,debt_to_equity,False,First Difference,True
+USA,APEI,roa,True,None,True
+USA,ATGE,roa,True,None,True
+USA,LOPE,roa,False,First Difference,True
+USA,STRA,roa,False,Second Difference,True
+USA,APEI,debt_change,True,Second Difference,True
+USA,ATGE,debt_change,True,Second Difference,True
+USA,LOPE,debt_change,True,Second Difference,True
+USA,STRA,debt_change,True,Second Difference,True

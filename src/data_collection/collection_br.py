@@ -22,7 +22,7 @@ class BRDataCollection:
                 return zipfile.ZipFile(io.BytesIO(r.content))
             return None
         except Exception as e:
-            print(f"Erro no download de {url}: {e}")
+            print(f"Download Error {url}: {e}")
             return None
 
     @staticmethod
@@ -38,33 +38,6 @@ class BRDataCollection:
             print(f"Error in reading {name}: {e}")
             return None
 
-    def process_year(self, year: int) -> pd.DataFrame:
-        url = f"https://dados.cvm.gov.br/dados/CIA_ABERTA/DOC/DFP/DADOS/dfp_cia_aberta_{year}.zip"
-        z = self.download_zip(url)
-        if not z:
-            print(f"{year}: file not found, skipping...")
-            return pd.DataFrame()
-
-        df_year = pd.DataFrame()
-
-        for name in z.namelist():
-            if not (any(f in name.lower() for f in self.required_files) and name.lower().endswith(".csv")):
-                continue
-
-            df = self.read_csv_from_zip(z, name)
-            if df is None or "DENOM_CIA" not in df.columns or "ORDEM_EXERC" not in df.columns:
-                continue
-
-            df_filtered = df[
-                (df["DENOM_CIA"].isin(self.companies)) &
-                (df["ORDEM_EXERC"].str.upper() == "ÚLTIMO")
-            ]
-
-            if not df_filtered.empty:
-                df_year = pd.concat([df_year, df_filtered], ignore_index=True)
-
-        return df_year
-
     def process_itr(self, year: int) -> pd.DataFrame:
         url = f"https://dados.cvm.gov.br/dados/CIA_ABERTA/DOC/ITR/DADOS/itr_cia_aberta_{year}.zip"
         z = self.download_zip(url)
@@ -79,18 +52,13 @@ class BRDataCollection:
                 continue
 
             df = self.read_csv_from_zip(z, name)
-            if df is None or "DENOM_CIA" not in df.columns or "ORDEM_EXERC" not in df.columns:
+            if df is None or "DENOM_CIA" not in df.columns or "ORDEM_EXERC" not in df.columns or "DT_FIM_EXERC" not in df.columns:
                 continue
-
-            #df_filtered = df[
-            #    (df["DENOM_CIA"].isin(self.companies)) &
-            #    (df["ORDEM_EXERC"].str.upper() == "ÚLTIMO")
-            #]
 
             df_filtered = df[
                 (df["DENOM_CIA"].isin(self.companies)) &
                 ((df["ORDEM_EXERC"].str.upper() == "ÚLTIMO") |
-                    ((df["ORDEM_EXERC"].str.upper() == "PENÚLTIMO") & (df["DT_FIM_EXERC"].str[3:5] == "12")))
+                    ((df["ORDEM_EXERC"].str.upper() == "PENÚLTIMO") & (df["DT_FIM_EXERC"].str[5:7] == "12")))
             ]
 
             if not df_filtered.empty:
@@ -103,7 +71,6 @@ class BRDataCollection:
 
         for year in tqdm(range(self.start_year, self.end_year)):
             try:
-                #df_year = self.process_year(year)
                 df_itr = self.process_itr(year)
                 if not df_itr.empty:
                     if consolidate:

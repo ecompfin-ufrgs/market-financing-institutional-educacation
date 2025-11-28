@@ -21,10 +21,10 @@ class USDataCollection:
             if response.status_code == 200:
                 return response.json()
             else:
-                print(f"Erro {response.status_code} ao acessar {url}")
+                print(f"Error {response.status_code} - {url}")
                 return {}
         except Exception as e:
-            print(f"Erro na requisição: {e}")
+            print(f"Error: {e}")
             return {}
 
     def process_ticker(self, ticker: str) -> pd.DataFrame:
@@ -45,7 +45,6 @@ class USDataCollection:
             )
             data = self.fetch_json(url)
 
-            #annual_reports = data.get("annualReports", [])
             quarterly_reports = data.get("quarterlyReports", [])
 
             if not quarterly_reports:
@@ -65,6 +64,8 @@ class USDataCollection:
 
         df_final["fiscalDateEnding"] = pd.to_datetime(df_final["fiscalDateEnding"])
         df_final = df_final.sort_values("fiscalDateEnding", ascending=False).reset_index(drop=True)
+
+        df_final = df_final[df_final["fiscalDateEnding"].dt.year >= 2010]
 
         return df_final
 

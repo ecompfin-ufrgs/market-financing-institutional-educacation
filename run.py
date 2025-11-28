@@ -3,12 +3,15 @@ import time
 
 
 from src.analysis.analysis import BaseAnalysisRunner
+from src.analysis.visualization_analysis import VisualizationAnalysis
 from src.data_collection.data_collector_base import DataCollector
 from src.data_processing.data_processor_base import DataProcessorBase
 from src.data_processing.preprocessing_br import BRDataProcessor
 from src.data_processing.preprocessing_us import USDataProcessor
+from src.modeling.run_inferential_analysis import InferentialAnalysis
 
 if __name__ == "__main__":
+    print("=== Pipeline execution started ===")
     total_start = time.perf_counter()
 
     start = time.perf_counter()
@@ -41,5 +44,18 @@ if __name__ == "__main__":
     end = time.perf_counter()
     print(f"Statistical Tests completed (Duration: {end - start:.2f} seconds)")
 
+    start = time.perf_counter()
+    print("Starting Generate Figures...")
+    VisualizationAnalysis().run_visualization()
+    end = time.perf_counter()
+    print(f"Generate Figures completed (Duration: {end - start:.2f} seconds)")
+
+    start = time.perf_counter()
+    print("Starting Inferential Analysis...")
+    InferentialAnalysis().inf_analysis_pipeline()
+    end = time.perf_counter()
+    print(f"Inferential Analysis completed (Duration: {end - start:.2f} seconds)")
+
     total_end = time.perf_counter()
-    print(f"Total duration: {total_end - total_start:.2f} seconds")
+    print("=== Pipeline successfully finished ===")
+    print(f"Total pipeline duration: {total_end - total_start:.2f} seconds")

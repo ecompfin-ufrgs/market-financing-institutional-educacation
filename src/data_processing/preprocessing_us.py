@@ -44,6 +44,8 @@ class USDataProcessor(DataProcessorBase):
                                 print('Formula error:', e)
 
             df = df.fillna(0)
+            df = df[df['total_debt'] != 0]
+
             return df
 
         except KeyError as e:
@@ -52,6 +54,3 @@ class USDataProcessor(DataProcessorBase):
         except Exception as e:
             print(f"Unexpected error while processing {file_path}: {e}")
             return None
-
-if __name__ == "__main__":
-    DataProcessorBase('us').run_processing(USDataProcessor(), "us_balance_data.csv")

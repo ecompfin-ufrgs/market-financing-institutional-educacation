@@ -4,7 +4,7 @@ import numpy as np
 from statsmodels.tsa.stattools import adfuller, kpss
 import warnings
 
-# warnings.filterwarnings('ignore')
+# warnings.filterwarnings('ignore') # Uncomment if you want to suppress warnings
 
 class StatisticalAnalysis:
     """
@@ -73,6 +73,7 @@ class StatisticalAnalysis:
                 'Mean': data.mean(),
                 'Median': data.median(),
                 'Std_Dev': data.std(),
+                'Coef_Var': (data.std() / data.mean()),
                 'Minimum': data.min(),
                 'Maximum': data.max(),
                 'Skewness': data.skew(),
@@ -118,7 +119,7 @@ class StatisticalAnalysis:
         """
         financial_vars = ['total_assets', 'current_assets', 'total_liabilities', 'current_liabilities',
                           'total_debt', 'shareholder_equity', 'dividends_paid', 'net_income',
-                          'operation_cash_flow', 'capex', 'revenue', 'working_capital',
+                          'operation_cash_flow', 'revenue', 'working_capital',
                           'debt_to_assets', 'debt_to_equity', 'roa', 'debt_change']
 
         stationarity_results = []
@@ -137,6 +138,19 @@ class StatisticalAnalysis:
                         series = company_data[var].dropna()
 
                         if len(series) < 3:
+                            continue
+
+                        if (series == series.iloc[0]).all():
+                            is_stationary = True
+                            transformation_applied = 'None (Constant Series)'
+                            final_stationary = True
+
+                            transformation_log.append({
+                                'Country': country, 'Company': company, 'Variable': var,
+                                'Original_Stationary': is_stationary,
+                                'Transformation_Applied': transformation_applied,
+                                'Final_Stationary': final_stationary
+                            })
                             continue
 
                         adf_result, kpss_result, is_stationary = self._test_stationarity(series)
@@ -226,3 +240,36 @@ class StatisticalAnalysis:
         us_summary.to_csv(os.path.join(self.results_dir, 'table4_us_stationarity.csv'))
 
         return br_summary, us_summary
+
+    def filter_non_stationary_series(self, df, transformation_log):
+        """
+        Filters the original DataFrame (df) by removing data for company/variable
+        pairs that did not achieve stationarity (Final_Stationary == False) after
+        transformations. The "removal" is done by setting the values to NaN.
+        """
+
+        non_stationary_series = transformation_log[
+            transformation_log['Final_Stationary'] == False
+            ]
+
+        df_filtered = df.copy()
+
+        for index, row in non_stationary_series.iterrows():
+            company = row['Company']
+            variable = row['Variable']
+
+            df_filtered.loc[df_filtered['company_name'] == company, variable] = np.nan
+
+        removal_log = transformation_log.copy()
+        removal_log['Action'] = np.where(
+            removal_log['Final_Stationary'],
+            'Kept (Stationary/Transformed)',
+            'Removed (Non-Stationary)'
+        )
+        removal_log = removal_log[
+            ['Country', 'Company', 'Variable', 'Transformation_Applied', 'Final_Stationary', 'Action']]
+        removal_log.to_csv(os.path.join(self.results_dir, 'table5_series_removal_log.csv'), index=False)
+
+        print(f"Series removal log saved to: {os.path.join(self.results_dir, 'table5_series_removal_log.csv')}")
+
+        return df_filtered

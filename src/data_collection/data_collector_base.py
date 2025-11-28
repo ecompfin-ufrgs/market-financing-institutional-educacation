@@ -26,7 +26,7 @@ class DataCollector:
         project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         output_dir = os.path.join(project_root, "data", "raw", "us")
 
-        tickers = ["TWOU", "ATGE", "LOPE", "STRA", "APEI"]
+        tickers = ["ATGE", "LOPE", "STRA"]
         api_key = "M4V35A5KMSYBMQ32"
 
         USDataCollection(
@@ -34,7 +34,3 @@ class DataCollector:
             api_key=api_key,
             output_dir=output_dir,
         ).run()
-
-if __name__ == "__main__":
-    DataCollector().us_data_collection()
-    DataCollector().br_data_collection()
