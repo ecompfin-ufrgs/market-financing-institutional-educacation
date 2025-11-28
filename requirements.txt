@@ -1,0 +1,7 @@
+requests~=2.32.5 # Pending Citing
+pandas~=2.3.2
+tqdm~=4.67.1 # Pending Citing
+numpy~=2.3.3
+matplotlib~=3.10.6
+seaborn~=0.13.2
+statsmodels~=0.14.5
