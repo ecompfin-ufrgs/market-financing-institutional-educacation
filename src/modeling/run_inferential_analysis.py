@@ -1,12 +1,12 @@
 import pandas as pd
 import numpy as np
-from pre_inferential_stage import DataPreparation
 import sys
 from scipy.stats import t
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
+from src.modeling.pre_inferential_stage import DataPreparation
 from src.modeling.pvar_models import PanelRegimeEstimator, PVAREstimator
 
 class InferentialAnalysis():
